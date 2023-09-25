@@ -1,0 +1,16 @@
+import numpy as np
+import cv2
+from matplotlib import pyplot as plt
+# Now black-out the area of logo in ROI
+img1_bg = cv2.bitwise_and(roi,roi,mask = mask_inv)
+
+# Take only region of logo from logo image.
+img2_fg = cv2.bitwise_and(img2,img2,mask = mask)
+
+# Put logo in ROI and modify the main image
+dst = cv2.add(img1_bg,img2_fg)
+img1[0:rows, 0:cols ] = dst
+
+plt.imshow(img1, cmap = 'gray')
+plt.xticks([]), plt.yticks([]) 
+plt.show()
